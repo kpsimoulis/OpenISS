@@ -42,6 +42,17 @@
 
             <button class="btn btn-primary" type="submit">SOAP Request</button>
 
+            <br><br><br><br><br><br><br>
+
+            <input type="submit" value="Enable depth mix"
+                   onclick="window.location='/enablemix/depth';" style="width: 150px; height: 40px;"/><br>
+            <input type="submit" value="Enable rgb mix"
+                   onclick="window.location='/enablemix/color';" style="width: 150px; height: 40px;"/><br>
+            <input type="submit" value="Enable canny mix"
+                   onclick="window.location='/enablemix/canny';" style="width: 150px; height: 40px;"/><br>
+            <input type="submit" value="Disable mix"
+                   onclick="window.location='/disablemix';" style="width: 150px; height: 40px;"/><br>
+
         </form>
     </div> <!-- End Row -->
 
@@ -86,13 +97,9 @@
             showImage('/'+method+'/example&' + type + '&' + op)
         }
 
-
-
-
-
-
         event.preventDefault();
     });
+
 
 
 

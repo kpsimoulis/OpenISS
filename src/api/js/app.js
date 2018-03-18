@@ -41,6 +41,47 @@ app.get('/getFrame/:type', function(req, res, next) {
 
 });
 
+app.get('/enablemix/:type', function(req, res, next) {
+    if (req.params.type != 'color' && req.params.type != 'depth' && req.params.type != 'canny') {
+        res.send("Invalid frame request");
+        next();
+    }
+
+    let args = {type: req.params.type};
+    service.patchMix(args, (function (error, response, body) {
+
+        if(error) {
+            console.log("got error");
+            console.log(error);
+            res.send(error);
+            next();
+        }
+        else {
+            res.sendFile(views + "index.html");
+        }
+
+    }));
+
+});
+
+app.get('/disablemix', function(req, res, next) {
+
+    service.deleteMix(null, (function (error, response, body) {
+
+        if(error) {
+            console.log("got error");
+            console.log(error);
+            res.send(error);
+            next();
+        }
+        else {
+            res.sendFile(views + "index.html");
+        }
+
+    }));
+
+});
+
 // Usage: /mixFrame/yourLocalImage&type&operand
 // Example: /mixFrame/example&color&+
 // A copyright free image called "example" is provided for testing purposes

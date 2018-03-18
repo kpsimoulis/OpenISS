@@ -13,7 +13,6 @@ exports.getFrame = function(args, cb) {
     request(requestSettings, function (error, response, body) {
         cb(error, response, body);
     });
-
 }
 
 exports.mixFrame = function(args, cb) {
@@ -32,6 +31,28 @@ exports.apiCall = function(args, cb) {
     var requestSettings = {
         url: baseUrl + '/rest/openiss/' + args.apiCall,
         method: 'GET'
+    };
+    request(requestSettings, function (error, response, body) {
+        cb(error, response, body);
+    });
+}
+
+exports.patchMix = function(args, cb) {
+
+    var requestSettings = {
+        url: baseUrl + '/rest/openiss/mix/' + args.type,
+        method: 'PATCH'
+    };
+    request(requestSettings, function (error, response, body) {
+        cb(error, response, body);
+    });
+}
+
+exports.deleteMix = function(args, cb) {
+
+    var requestSettings = {
+        url: baseUrl + '/rest/openiss/mix',
+        method: 'DELETE'
     };
     request(requestSettings, function (error, response, body) {
         cb(error, response, body);
