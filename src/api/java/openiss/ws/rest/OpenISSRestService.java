@@ -2,14 +2,10 @@ package openiss.ws.rest;
 
 import openiss.utils.OpenISSImageDriver;
 import openiss.utils.PATCH;
-import openiss.ws.soap.endpoint.ServicePublisher;
-
-import javax.activation.MimetypesFileTypeMap;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
-import java.io.File;
 
 @Path("/openiss")
 public class OpenISSRestService {
@@ -45,15 +41,11 @@ public class OpenISSRestService {
         return Response.ok(pipelineImage(image)).build();
     }
 
-    private static String colorFileName = "src/api/java/openiss/ws/soap/service/color_example.jpg";
-    private static String depthFileName = "src/api/java/openiss/ws/soap/service/depth_example.jpg";
-
     @GET
     @Path("/{type}")
     @Produces("image/*")
     public Response getImage(@PathParam(value = "type") String type) {
 
-        File src;
         ResponseBuilder response;
         byte[] image = new byte[0];
         // validity checks
@@ -61,22 +53,12 @@ public class OpenISSRestService {
             return Response.noContent().build();
         }
 
-
-        if (ServicePublisher.USE_FREENECT) {
-            if (type.equals("color")) {
-                image = driver.getFrame("color");
-            } else {
-                image = driver.getFrame("depth");
-            }
-            response = Response.ok(pipelineImage(image), "image/jpeg");
+        if (type.equals("color")) {
+            image = driver.getFrame("color");
         } else {
-            if (type.equals("color")) {
-                src = new File(colorFileName);
-            } else {
-                src = new File(depthFileName);
-            }
-            response = Response.ok(src, new MimetypesFileTypeMap().getContentType(src));
+            image = driver.getFrame("depth");
         }
+        response = Response.ok(pipelineImage(image), "image/jpeg");
 
         return response.build();
     }
@@ -151,6 +133,7 @@ public class OpenISSRestService {
         byte[] processedImage = image;
 
         if (mixFlag.equals("depth")) {
+            //@TODO this needs to be fixed conditionally to work with static image and driver
             processedImage = driver.mixFrame(image, "depth", "+");
         } else if (mixFlag.equals("color")) {
             processedImage = driver.mixFrame(image, "color", "+");
