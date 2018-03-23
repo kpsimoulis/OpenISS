@@ -14,5 +14,7 @@
   <p><a href="rest/openiss/hello">Jersey Hello World</a></p>
   <p><a href="rest/openiss/color">Color Image</a></p>
   <p><a href="rest/openiss/depth">Depth Image</a></p>
+  <p><a href="rest/openiss/opencv/canny">canny Image</a></p>
+  <p><a href="rest/openiss/opencv/contour">contour Image</a></p>
   </body>
 </html>

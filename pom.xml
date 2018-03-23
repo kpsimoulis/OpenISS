@@ -38,6 +38,17 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/java/opencv-340.jar</systemPath>
         </dependency>
+        <dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
     </dependencies>
 
     <properties>
